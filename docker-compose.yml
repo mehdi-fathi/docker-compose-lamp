@@ -32,6 +32,8 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
   phpmyadmin:
+    build:
+      context: ./bin/phpmyadmin
     image: phpmyadmin/phpmyadmin
     container_name: 'sc-phpmyadmin'
     links:
@@ -48,6 +50,7 @@ services:
       - '8080:80'
     volumes: 
       - /sessions
+      - ${PHPMYADMIN_DIR}/config.inc.php:/var/www/html/config.inc.php
   redis:
     container_name: 'sc-redis'
     image: redis:latest
